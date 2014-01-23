@@ -1,0 +1,5 @@
+# Hi, robot.
+# Behave.
+
+User-agent: *
+Disallow: /

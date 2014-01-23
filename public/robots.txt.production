@@ -1,0 +1,12 @@
+# Hi, robot.
+# Behave.
+
+User-agent: *
+Disallow: /assets/
+
+# All robots should follow these instructions:
+Disallow: /harm/human/beings
+Disallow: /disobey/orders # except when it conflicts with instruction #1
+Disallow: /endanger/self  # except when it conflicts with instructions #1 and #2
+
+Allow: /

@@ -1,0 +1,4 @@
+db {
+    name "dev_aerogel_db"
+    hosts ["localhost:27017"]
+}

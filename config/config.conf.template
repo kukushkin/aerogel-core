@@ -1,0 +1,7 @@
+application {
+    title 'aerogel'
+}
+
+google_analytics {
+  enabled false
+}
