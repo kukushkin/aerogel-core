@@ -8,10 +8,10 @@ module Aerogel::Assets
     # Include these files when precompiling assets
     app.set :assets_precompile, %w(application.js application.css *.png *.jpg *.svg *.eot *.ttf *.woff)
 
-    # Logical paths to your assets
+    # Logical paths to your assets (in reverse order)
     app.set :assets_prefix, [
       Aerogel.get_resource_paths( :assets )
-    ].flatten
+    ].flatten.reverse
 
     # Use another host for serving assets
     # set :assets_host, '<id>.cloudfront.net'
