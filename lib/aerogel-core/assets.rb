@@ -6,7 +6,7 @@ module Aerogel::Assets
   #
   def self.registered( app )
     # Include these files when precompiling assets
-    app.set :assets_precompile, %w(application.js application.css *.png *.jpg *.svg *.eot *.ttf *.woff)
+    app.set :assets_precompile, %w(application.js application.css *.png *.jpg *.gif *.svg *.eot *.ttf *.woff)
 
     # Logical paths to your assets (in reverse order)
     app.set :assets_prefix, [
