@@ -8,8 +8,8 @@ module Aerogel::Helpers
   #   <% assets 'controller/name' %> # for controller specific assets
   #
   def assets( filename = :application )
-    (stylesheet_tag scope.to_s) +
-    (javascript_tag scope.to_s)
+    (stylesheet_tag filename.to_s) +
+    (javascript_tag filename.to_s)
   end
 
 end # module Aerogel::Helpers
