@@ -1,4 +1,5 @@
 require 'aerogel/configurator'
+require 'rack-flash'
 
 module Aerogel::Config
 
@@ -19,6 +20,14 @@ module Aerogel::Config
     Aerogel.get_resource_list( :config, '*.conf', app.environment ).each do |config_filename|
       app.config.load config_filename
     end
+
+    # set :protection, true
+    # set :protect_from_csrf, true
+    app.set :sessions, true
+    # TODO: demand to configure session secret on application level
+    # set :session_secret, '$aer0G31'
+    app.use Rack::Protection::AuthenticityToken
+    app.use Rack::Flash
 
   end
 end # module Aerogel::Config

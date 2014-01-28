@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sinatra'
   spec.add_dependency 'sinatra-contrib'
   spec.add_dependency 'sinatra-asset-pipeline'
+  spec.add_dependency 'rack-flash3'
   spec.add_dependency 'sass'
   spec.add_dependency 'coffee-script'
   spec.add_dependency 'uglifier'

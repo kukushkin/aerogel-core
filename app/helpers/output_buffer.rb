@@ -3,8 +3,8 @@ module Aerogel::Helpers
   def output_concat( text )
     if self.respond_to?(:is_haml?) && is_haml?
       haml_concat(text)
-    elsif !OutputBuffer.buffer.nil? # has_erb_buffer?
-      OutputBuffer.buffer.concat text
+    elsif !Aerogel::Render::OutputBuffer.buffer.nil? # has_erb_buffer?
+      Aerogel::Render::OutputBuffer.buffer.concat text
     else # theres no template to concat, return the text directly
       text
     end
@@ -15,9 +15,9 @@ module Aerogel::Helpers
     if self.respond_to?(:is_haml?) && is_haml? && (block_is_haml?(inner_block) rescue false)
       # haml
       capture_haml(nil, &block)
-    elsif OutputBuffer.block_is_erb? block
+    elsif Aerogel::Render::OutputBuffer.block_is_erb? block
       # erb
-      OutputBuffer.capture( &block )
+      Aerogel::Render::OutputBuffer.capture( &block )
     else
       block.call
     end
