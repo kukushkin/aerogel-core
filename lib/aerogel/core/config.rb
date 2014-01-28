@@ -8,7 +8,7 @@ module Aerogel::Config
   def self.registered(app)
     app.set :root, Aerogel.application_path
     app.set :views, Aerogel.get_resource_paths( :views ).reverse
-    app.set :erb, layout: "layouts/application.html".to_sym
+    app.set :erb, trim: '-', layout: "layouts/application.html".to_sym
 
     require 'sinatra/reloader' if app.development?
     app.configure :development do
