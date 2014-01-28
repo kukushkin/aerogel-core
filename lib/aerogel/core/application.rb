@@ -12,25 +12,25 @@ class Aerogel::Application < Sinatra::Base
   # Loads and configures application modules
   #
   def self.load
-    on_load
+    Aerogel.on_load_callbacks.each do |callback|
+      callback.call self
+    end
+    puts "** Aerogel application configured v#{Aerogel::version}-#{environment}"
     self
   end
 
-private
+end # class Aerogel::Application
 
+Aerogel.on_load do |app|
   # Loads application environment
   #
-  def self.on_load
-    # application path is registered last
-    Aerogel.register_path( Aerogel.application_path )
+  # application path is registered last
+  Aerogel.register_path( Aerogel.application_path )
 
-    register Aerogel::Helpers
-    register Aerogel::Config
-    register Aerogel::Routes
-    register Aerogel::Assets
-    register Aerogel::Db
-    register Aerogel::Render
-    puts "** Aerogel application configured v#{Aerogel::version}-#{environment}"
-  end
-
-end # class Aerogel::Application
+  app.register Aerogel::Helpers
+  app.register Aerogel::Config
+  app.register Aerogel::Routes
+  app.register Aerogel::Assets
+  app.register Aerogel::Db
+  app.register Aerogel::Render
+end

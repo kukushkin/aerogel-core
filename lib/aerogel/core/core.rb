@@ -93,5 +93,17 @@ module Aerogel
     true
   end
 
+  # Returns registered on-load callbacks.
+  #
+  def self.on_load_callbacks
+    @on_load_callbacks || []
+  end
+
+  # Registers on-load callback.
+  #
+  def self.on_load( &block )
+    @on_load_callbacks ||= []
+    @on_load_callbacks << block
+  end
 
 end # module Aerogel
