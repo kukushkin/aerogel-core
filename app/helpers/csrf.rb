@@ -9,7 +9,7 @@ module Aerogel::Helpers
   end
 
   def csrf_token_field
-    input_hidden_tag csrf_field_name, csrf_token
+    tag :input, type: 'hidden', name: csrf_field_name, value: csrf_token
   end
 
   def csrf_protected?
