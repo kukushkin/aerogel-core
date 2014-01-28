@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["alex@kukushk.in"]
   spec.description   = %q{Aerogel core module}
   spec.summary       = %q{Aerogel is a modular opinionated CMS}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/kukushkin/aerogel-core"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
