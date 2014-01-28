@@ -1,10 +1,11 @@
 require 'sinatra/base'
 
-require 'aerogel-core/config'
-require 'aerogel-core/helpers'
-require 'aerogel-core/routes'
-require 'aerogel-core/assets'
-require 'aerogel-core/db'
+require 'aerogel/core/config'
+require 'aerogel/core/helpers'
+require 'aerogel/core/routes'
+require 'aerogel/core/assets'
+require 'aerogel/core/db'
+require 'aerogel/core/render'
 
 class Aerogel::Application < Sinatra::Base
 
@@ -28,6 +29,7 @@ private
     register Aerogel::Routes
     register Aerogel::Assets
     register Aerogel::Db
+    register Aerogel::Render
     puts "** Aerogel application configured v#{Aerogel::version}-#{environment}"
   end
 

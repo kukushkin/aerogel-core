@@ -1,5 +1,5 @@
 require 'sinatra/asset_pipeline/task'
-require 'aerogel-core'
+require 'aerogel/core'
 
 Aerogel::Application.load
 Sinatra::AssetPipeline::Task.define! Aerogel::Application
