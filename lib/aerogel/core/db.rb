@@ -12,10 +12,10 @@ module Aerogel::Db
   #
   def self.registered( app )
     self.environment = app.environment
-    raise "Database connection is not configured in your application's config/*" if app.config.db.nil?
+    raise "Database connection is not configured in your application's config/*" if Aerogel.config.db.nil?
     Mongoid.configure do |config|
       config.sessions = {
-        default: { hosts: app.config.db.hosts, database: app.config.db.name }
+        default: { hosts: Aerogel.config.db.hosts, database: Aerogel.config.db.name }
       }
     end
     load_models
