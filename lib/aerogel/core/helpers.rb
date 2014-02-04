@@ -1,4 +1,6 @@
-
+# Aerogel::Helpers are registered both as Sinatra extensions and Sinatra helpers,
+# so any helper is available both at application and request scope level.
+#
 module Aerogel::Helpers
 
   def self.registered(app)

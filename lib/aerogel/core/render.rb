@@ -1,5 +1,6 @@
 require 'aerogel/core/render/output_buffer'
 require 'aerogel/core/render/block_helper'
+require 'aerogel/core/render/scope'
 
 
 module Aerogel::Render
