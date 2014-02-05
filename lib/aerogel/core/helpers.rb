@@ -5,7 +5,9 @@ module Aerogel::Helpers
 
   def self.registered(app)
     # load helpers
-    Aerogel.require_resources( :app, "helpers/**/*.rb" )
+    Aerogel.get_resource_list( :app, "helpers/**/*.rb" ).each do |filename|
+      Aerogel.require_into( self, filename )
+    end
     app.helpers Aerogel::Helpers
   end
 

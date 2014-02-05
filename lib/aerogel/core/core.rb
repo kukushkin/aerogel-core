@@ -93,6 +93,13 @@ module Aerogel
     true
   end
 
+  # Requires file, loads into context of a module/class.
+  #
+  def self.require_into( mod_class, filename )
+    puts "* #{mod_class}.require '#{filename}'"
+    mod_class.class_eval File.read(filename), filename
+  end
+
   # Returns registered on-load callbacks.
   #
   def self.on_load_callbacks

@@ -1,4 +1,4 @@
-module Aerogel::Helpers
+# module Aerogel::Helpers
 
   # Escapes html string.
   #
@@ -21,4 +21,4 @@ module Aerogel::Helpers
     erb name_parts.join('/').to_sym, opts
   end
 
-end # module Aerogel::Helpers
+# end # module Aerogel::Helpers

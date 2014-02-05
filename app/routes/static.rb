@@ -1,5 +1,3 @@
-class Aerogel::Application
-
 get "/*" do |filename|
   pass if filename.blank?
   path = Aerogel.get_resource( :public, filename )
@@ -7,5 +5,3 @@ get "/*" do |filename|
   pass unless path
   send_file path
 end
-
-end # class Aerogel::Application

@@ -49,7 +49,7 @@ private
   #
   def self.load_models
     self.models = []
-    Aerogel.get_resource_list( 'db/model', '*.rb', environment ).each do |model_filename|
+    Aerogel.get_resource_list( 'db/model', '*.rb' ).each do |model_filename|
       require model_filename
       class_name = File.basename( model_filename, '.rb' ).camelize
       self.models << eval(class_name)
