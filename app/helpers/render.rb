@@ -8,8 +8,8 @@
 
   # Renders erb template.
   #
-  def view( name )
-    erb "#{name}.html".to_sym
+  def view( name, *args )
+    erb( "#{name}.html".to_sym, *args )
   end
 
   # Renders partial erb template.
