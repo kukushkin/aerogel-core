@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'coffee-script'
   spec.add_dependency 'uglifier'
   spec.add_dependency 'yui-compressor'
-  spec.add_dependency 'aerogel-configurator'
+  spec.add_dependency 'aerogel-configurator', "~> 1.3"
   spec.add_dependency 'mongoid'
 
   spec.add_development_dependency "bundler", "~> 1.3"

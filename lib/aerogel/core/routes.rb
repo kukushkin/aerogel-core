@@ -18,7 +18,7 @@ module Aerogel::Routes
     end
 
     # register reloader
-    setup_reloader(app) if Aerogel.config.aerogel.reloader
+    setup_reloader(app) if Aerogel.config.aerogel.reloader?
   end
 
 private

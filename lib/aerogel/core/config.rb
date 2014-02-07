@@ -24,7 +24,7 @@ module Aerogel
         Aerogel.config.load config_filename
       end
       # register reloader
-      setup_reloader(app) if Aerogel.config.aerogel.reloader
+      setup_reloader(app) if Aerogel.config.aerogel.reloader?
 
       # set :protection, true
       # set :protect_from_csrf, true
@@ -42,7 +42,7 @@ module Aerogel
     # Resets loaded config files.
     #
     def self.reset!(app)
-      Aerogel.config.clear
+      Aerogel.config.clear!
       Aerogel.config.aerogel.reloader = app.development?
     end
 
