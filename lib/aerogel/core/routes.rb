@@ -1,6 +1,17 @@
+class Sinatra::Base
+  class << self
+    def reset_routes!
+      @routes = {}
+      @filters = {:before => [], :after => []}
+      @errors = {}
+    end
+  end
+end # class Sinatra::Base
+
 module Aerogel::Routes
 
   def self.registered(app)
+    reset!(app)
     # load routes
     Aerogel.get_resource_list( :app, "routes/**/*.rb" ).reverse.each do |filename|
       Aerogel.require_into( Aerogel::Application, filename )
@@ -15,9 +26,7 @@ private
   # Resets items defined in app/routes/*.
   #
   def self.reset!(app)
-    app.routes = {}
-    app.filters = {:before => [], :after => []}
-    app.errors = {}
+    app.reset_routes!
   end
 
   # Sets up reloader for routes.
