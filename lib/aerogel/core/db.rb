@@ -62,6 +62,11 @@ private
   # Resets models.
   #
   def self.reset!(app = nil)
+    self.models ||= []
+    # reset model classes
+    self.models.each do |model|
+      Object.send(:remove_const, model.name.to_sym)
+    end
     self.models = []
   end
 
