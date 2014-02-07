@@ -20,6 +20,9 @@ module Aerogel::Db
     end
     load_models
 
+    # register reloader
+    setup_reloader(app) if Aerogel.config.aerogel.reloader
+
     # disable [deprecated] warning in Mongoid method calls
     I18n.enforce_available_locales = false if defined? I18n
   end
@@ -48,13 +51,30 @@ private
   # Loads all models from the folder db/model/*
   #
   def self.load_models
-    self.models = []
+    reset!
     Aerogel.get_resource_list( 'db/model', '*.rb' ).each do |model_filename|
-      require model_filename
+      load model_filename
       class_name = File.basename( model_filename, '.rb' ).camelize
       self.models << eval(class_name)
     end
   end
+
+  # Resets models.
+  #
+  def self.reset!(app = nil)
+    self.models = []
+  end
+
+  #
+  # Configures reloader for models.
+  #
+  def self.setup_reloader(app)
+    app.use Aerogel::Reloader, ->{ Aerogel.get_resource_list( "db/model", "*.rb" ) } do
+      reset!(app)
+      load_models
+    end
+  end
+
 
   # Create database indexes for all models
   #

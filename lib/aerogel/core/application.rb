@@ -1,5 +1,6 @@
 require 'sinatra/base'
 
+require 'aerogel/core/reloader'
 require 'aerogel/core/config'
 require 'aerogel/core/helpers'
 require 'aerogel/core/routes'
@@ -27,8 +28,8 @@ Aerogel.on_load do |app|
   # application path is registered last
   Aerogel.register_path( Aerogel.application_path )
 
-  app.register Aerogel::Helpers
   app.register Aerogel::Config
+  app.register Aerogel::Helpers
   app.register Aerogel::Routes
   app.register Aerogel::Assets
   app.register Aerogel::Db
