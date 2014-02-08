@@ -1,5 +1,6 @@
 require 'mongoid'
 require 'aerogel/configurator'
+require 'aerogel/core/db/model'
 
 module Aerogel::Db
 
@@ -16,6 +17,9 @@ module Aerogel::Db
     Mongoid.configure do |config|
       config.sessions = {
         default: { hosts: Aerogel.config.db.hosts, database: Aerogel.config.db.name }
+      }
+      config.options = {
+        raise_not_found_error: false
       }
     end
     load_models
