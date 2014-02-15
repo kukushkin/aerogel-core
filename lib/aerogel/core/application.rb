@@ -7,6 +7,7 @@ require 'aerogel/core/routes'
 require 'aerogel/core/assets'
 require 'aerogel/core/db'
 require 'aerogel/core/render'
+require 'aerogel/core/errors'
 
 class Aerogel::Application < Sinatra::Base
 
