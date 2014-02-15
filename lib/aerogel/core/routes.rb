@@ -1,12 +1,5 @@
-class Sinatra::Base
-  class << self
-    def reset_routes!
-      @routes = {}
-      @filters = {:before => [], :after => []}
-      @errors = {}
-    end
-  end
-end # class Sinatra::Base
+require 'aerogel/core/routes/namespace'
+require 'aerogel/core/routes/sinatra_ex'
 
 module Aerogel::Routes
 
@@ -19,6 +12,23 @@ module Aerogel::Routes
 
     # register reloader
     setup_reloader(app) if Aerogel.config.aerogel.reloader?
+  end
+
+
+  # Starts a new route namespace:
+  #
+  # get '/bar' do
+  #   # matches '/bar' route
+  # end
+  #
+  # namespace '/foo' do
+  #   get '/bar' do
+  #     # matches '/foo/bar' route
+  #   end
+  # end
+  #
+  def namespace( path, *args, &block )
+    Namespace.new self, path, &block
   end
 
 private

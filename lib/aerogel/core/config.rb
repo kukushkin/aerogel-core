@@ -1,7 +1,6 @@
 require 'aerogel/configurator'
 require 'rack-flash'
 require 'sinatra/multi_route'
-require 'sinatra/namespace'
 
 module Aerogel
 
@@ -36,7 +35,6 @@ module Aerogel
       app.use Rack::Flash
 
       app.register Sinatra::MultiRoute
-      app.register Sinatra::Namespace
     end
 
   private
