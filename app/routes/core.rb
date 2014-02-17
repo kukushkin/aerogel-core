@@ -3,7 +3,7 @@ get "/" do
 end
 
 get "/:action" do
-  view params['action'] rescue raise Sinatra::NotFound.new
+  view params['action'] # rescue raise Sinatra::NotFound.new
 end
 
 not_found do

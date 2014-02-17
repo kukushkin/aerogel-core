@@ -32,7 +32,7 @@ module Aerogel
       # TODO: demand to configure session secret on application level
       # set :session_secret, '$aer0G31'
       app.use Rack::Protection::AuthenticityToken
-      app.use Rack::Flash
+      app.use Rack::Flash, :sweep => true
 
       app.register Sinatra::MultiRoute
     end
