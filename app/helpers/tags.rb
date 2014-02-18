@@ -21,3 +21,9 @@ def tag( name, *args, &block )
     return output
   end
 end
+
+# Creates <a href=''..>...</a> tag.
+#
+def link_to( url, text = url, opts = {} )
+  tag :a, text, opts.merge( href: url )
+end
