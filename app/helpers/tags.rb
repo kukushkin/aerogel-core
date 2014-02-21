@@ -8,7 +8,7 @@ def tag( name, *args, &block )
   end
   attrs = args.shift || {}
 #    t_attrs = attrs.map{|k,v| v.nil? ? " #{k}" : " #{k}=\"#{h(v)}\""}
-  t_attrs = attrs.map{|k,v| v.nil? ? " #{k}" : " #{k}=\"#{(v)}\""}
+  t_attrs = attrs.map{|k,v| v.nil? ? " #{k}" : " #{k}=\"#{h(v)}\""}
   if content
     output = "<#{name}#{t_attrs.join}>"+content+"</#{name}>"
   else
