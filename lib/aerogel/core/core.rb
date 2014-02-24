@@ -1,3 +1,6 @@
+require 'active_support/core_ext'
+require 'aerogel/core/core_ext/array'
+
 module Aerogel
 
   class << self
