@@ -27,3 +27,9 @@ end
 def link_to( url, text = url, opts = {} )
   tag :a, text, opts.merge( href: url )
 end
+
+# Creates a <button ...>...</button> tag.
+#
+def button_to( url, text = url, opts = {} )
+  tag :button, text, opts
+end
