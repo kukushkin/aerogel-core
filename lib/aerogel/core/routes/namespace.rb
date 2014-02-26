@@ -14,7 +14,7 @@ class Namespace
 
   def prefixed( method, *args, &block )
     options = Hash === args.last ? args.pop : {}
-    routes = [*(args.pop || '')]
+    routes = [*(args.pop || '*')]
     routes, args = routes+args, [] unless method == :route
     routes.map!{|r| @prefix_path+r }
     routes = [routes] if method == :route

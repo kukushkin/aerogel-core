@@ -7,8 +7,10 @@ end
 
 # Renders erb template.
 #
-def view( name, *args )
-  erb( "#{name}.html".to_sym, *args )
+def view( name, opts = {} )
+  default_opts = {}
+  default_opts[:layout] = :"layouts/#{layout}" if layout.present?
+  erb( "#{name}.html".to_sym, default_opts.merge(opts) )
 end
 
 # Renders partial erb template.
@@ -51,3 +53,9 @@ def page_title( value = nil )
   @page_title
 end
 
+# Sets/gets current layout.
+#
+def layout( value = nil )
+  @layout = value unless value.nil?
+  @layout
+end
