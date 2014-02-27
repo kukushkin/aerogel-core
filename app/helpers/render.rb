@@ -9,7 +9,7 @@ end
 #
 def view( name, opts = {} )
   default_opts = {}
-  default_opts[:layout] = :"layouts/#{layout}" if layout.present?
+  default_opts[:layout] = :"layouts/#{layout}.html" if layout.present?
   erb( "#{name}.html".to_sym, default_opts.merge(opts) )
 end
 
