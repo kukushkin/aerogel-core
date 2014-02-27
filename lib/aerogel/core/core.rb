@@ -1,5 +1,6 @@
 require 'active_support/core_ext'
 require 'aerogel/core/core_ext/array'
+require 'aerogel/core/core_ext/hash'
 
 module Aerogel
 
