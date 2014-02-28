@@ -30,7 +30,10 @@ module Aerogel
       # set :protect_from_csrf, true
       app.set :sessions, true
       # TODO: demand to configure session secret on application level
-      # set :session_secret, '$aer0G31'
+      if Aerogel.config.session_secret?
+        app.set :session_secret, Aerogel.config.session_secret!
+      end
+
       app.use Rack::Protection::AuthenticityToken
       app.use Rack::Flash, :sweep => true
 
