@@ -9,3 +9,9 @@ def logger( name = nil )
     env['rack.logger.'+name.to_s] or raise("Logger with name '#{name}' is not registered")
   end
 end
+
+# Returns current_url
+#
+def current_url
+  request.path_info
+end
