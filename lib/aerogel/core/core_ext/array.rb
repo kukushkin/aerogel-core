@@ -28,5 +28,11 @@ class Array
     self.replace( self.only *args )
   end
 
+  # Returns +true+ if this array contains +other+ completely.
+  #
+  def contains?( other )
+    ( other - self ).blank?
+  end
+
 
 end # class Array
