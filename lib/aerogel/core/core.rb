@@ -45,6 +45,9 @@ module Aerogel
   # Returns list of filenames of resources of specified type,
   # environment sub-folders included, filtered by wildcard mask.
   #
+  # Resources are listed in a forward order of paths, files within each
+  # path listed in alphabetic order.
+  #
   # The resources are searched in following order:
   #   path1 + wildcard
   #   path1 + environment + wildcard
@@ -54,6 +57,30 @@ module Aerogel
   #
   def self.get_resource_list( type, wildcard, environment = nil )
     get_resource_paths( type ).map do |path|
+      paths = Dir.glob( File.join( path, wildcard ) )
+      if environment
+        paths << Dir.glob( File.join( path, environment.to_s, wildcard ) )
+      end
+      # puts "Aerogel::get_resource_list: type=#{type} environment=#{environment} path=#{path}: #{paths}"
+      paths
+    end.flatten
+  end
+
+  # Returns reversed list of filenames of resources of specified type,
+  # environment sub-folders included, filtered by wildcard mask.
+  #
+  # Reverse order is applied to registered paths, but not to files within single path,
+  # which are listed in alphabetic order.
+  #
+  # The resources are searched in following order:
+  #   path1 + wildcard
+  #   path1 + environment + wildcard
+  #   path2 + wildcard
+  #   path2 + environment + wildcard
+  #   etc
+  #
+  def self.get_reverse_resource_list( type, wildcard, environment = nil )
+    get_resource_paths( type ).reverse.map do |path|
       paths = Dir.glob( File.join( path, wildcard ) )
       if environment
         paths << Dir.glob( File.join( path, environment.to_s, wildcard ) )
@@ -86,7 +113,7 @@ module Aerogel
   # Require resources specified by type and wildcard in reverse order.
   #
   def self.require_resources_reverse( type, wildcard, environment = nil )
-    files_to_require = Aerogel.get_resource_list( type, wildcard, environment ).reverse
+    files_to_require = Aerogel.get_reverse_resource_list( type, wildcard, environment )
     files_to_require.each do |filename|
       # begin
         require filename

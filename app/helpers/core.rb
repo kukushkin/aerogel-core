@@ -15,3 +15,14 @@ end
 def current_url
   request.path_info
 end
+
+
+# xhr-conscious redirect.
+#
+def redirect(uri, *args)
+  if request.xhr?
+    halt 200, {'Content-Type' => 'text/javascript'}, "window.location.href=\"#{uri}\""
+  else
+    super( uri, *args )
+  end
+end
