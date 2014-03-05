@@ -31,4 +31,11 @@ module Model
     end
   end # module NonPersistent
 
+  module Timestamps
+    extend ActiveSupport::Concern
+    included do
+      include Mongoid::Timestamps
+    end
+  end # module Timestamps
+
 end # module Model
