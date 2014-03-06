@@ -21,6 +21,12 @@ end
 #
 def redirect(uri, *args)
   if request.xhr?
+    if Hash === args.first
+      opts = args.first
+      [:error, :notice, :warning].each do |flash_key|
+        flash[flash_key] = opts[flash_key] if opts[flash_key].present?
+      end
+    end
     halt 200, {'Content-Type' => 'text/javascript'}, "window.location.href=\"#{uri}\""
   else
     super( uri, *args )
