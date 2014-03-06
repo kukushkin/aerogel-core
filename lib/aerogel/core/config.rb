@@ -1,5 +1,6 @@
 require 'aerogel/configurator'
 require 'rack-flash'
+require 'sinatra/redirect_with_flash'
 require 'sinatra/multi_route'
 
 module Aerogel
@@ -36,6 +37,7 @@ module Aerogel
 
       app.use Rack::Protection::AuthenticityToken
       app.use Rack::Flash, :sweep => true
+      app.helpers Sinatra::RedirectWithFlash
 
       app.register Sinatra::MultiRoute
     end
