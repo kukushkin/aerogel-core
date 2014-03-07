@@ -55,13 +55,19 @@ module Aerogel
   #   path2 + environment + wildcard
   #   etc
   #
-  def self.get_resource_list( type, wildcard, environment = nil )
+  def self.get_resource_list( type, wildcard, environment = nil, &block )
     get_resource_paths( type ).map do |path|
       paths = Dir.glob( File.join( path, wildcard ) )
       if environment
         paths << Dir.glob( File.join( path, environment.to_s, wildcard ) )
       end
       # puts "Aerogel::get_resource_list: type=#{type} environment=#{environment} path=#{path}: #{paths}"
+      if block_given?
+        paths.each do |filename|
+          relative_filename = filename.sub( /^#{path}\/?/, '' )
+          yield filename, relative_filename, path
+        end
+      end
       paths
     end.flatten
   end

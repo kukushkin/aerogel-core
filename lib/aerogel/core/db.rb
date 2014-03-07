@@ -56,10 +56,11 @@ private
   #
   def self.load_models
     reset!
-    Aerogel.get_resource_list( 'db/model', '*.rb' ).each do |model_filename|
-      load model_filename
-      class_name = File.basename( model_filename, '.rb' ).camelize
-      self.models << eval(class_name)
+    Aerogel.get_resource_list( 'db/model', '**/*.rb' ) do |full_filename, model_filename, path|
+      puts "** loading model: #{path} #{model_filename}"
+      load full_filename
+      # puts "** classify: #{class_name}"
+      self.models << filename_to_model( model_filename )
     end
   end
 
@@ -69,7 +70,7 @@ private
     self.models ||= []
     # reset model classes
     self.models.each do |model|
-      Object.send(:remove_const, model.name.to_sym)
+      model.parent.send(:remove_const, model.name.demodulize.to_sym)
     end
     self.models = []
   end
@@ -146,6 +147,12 @@ private
   #
   def self.humanize_seed_keys( obj_keys )
     obj_keys.map{|k,v| "#{k}:'#{v}'"}.join(', ')
+  end
+
+  # Returns class object inferred from filename.
+  #
+  def self.filename_to_model( filename )
+    filename.chomp('.rb').split("/").map(&:camelize).join("::").constantize
   end
 
 end # module Aerogel::Db

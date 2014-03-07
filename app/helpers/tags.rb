@@ -31,5 +31,5 @@ end
 # Creates a <button ...>...</button> tag.
 #
 def button_to( url, text = url, opts = {} )
-  tag :button, text, opts
+  tag :button, text, opts.merge( url: url )
 end
