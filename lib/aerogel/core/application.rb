@@ -8,6 +8,7 @@ require 'aerogel/core/assets'
 require 'aerogel/core/db'
 require 'aerogel/core/render'
 require 'aerogel/core/errors'
+require 'aerogel/core/i18n'
 
 class Aerogel::Application < Sinatra::Base
 
@@ -35,4 +36,5 @@ Aerogel.on_load do |app|
   app.register Aerogel::Assets
   app.register Aerogel::Db
   app.register Aerogel::Render
+  app.register Aerogel::I18n
 end
