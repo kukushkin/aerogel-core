@@ -29,7 +29,10 @@ module Aerogel
 
       # set :protection, true
       # set :protect_from_csrf, true
-      app.set :sessions, true
+      app.enable :sessions
+      if Aerogel.config.hostname?
+        app.set :sessions, domain: "."+Aerogel.config.hostname!
+      end
       # TODO: demand to configure session secret on application level
       if Aerogel.config.session_secret?
         app.set :session_secret, Aerogel.config.session_secret!
