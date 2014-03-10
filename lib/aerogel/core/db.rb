@@ -69,7 +69,7 @@ private
   def self.reset!(app = nil)
     self.models ||= []
     # reset model classes
-    self.models.each do |model|
+    self.models.uniq.each do |model|
       model.parent.send(:remove_const, model.name.demodulize.to_sym)
     end
     self.models = []
