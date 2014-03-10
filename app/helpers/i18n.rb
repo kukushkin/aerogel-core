@@ -1,11 +1,11 @@
-# +t+ helper, alias for R18n.t
+# +t+ helper, alias for chainable helper Aerogel::I18n.t
 #
 def t( *args )
-  ::I18n.t( *args )
+  Aerogel::I18n.t( *args )
 end
 
-# +l+ helper, alias for R18n.l
+# +l+ helper, alias for Aerogel::I18n.l
 #
 def l( *args )
-  ::I18n.l( *args )
+  Aerogel::I18n.l( *args )
 end
