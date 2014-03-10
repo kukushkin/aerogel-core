@@ -1,0 +1,6 @@
+ru:
+    aerogel:
+        db:
+            errors:
+                failed_to_save:
+                    "Не удалось сохранить объект %{name}: %{errors}"
