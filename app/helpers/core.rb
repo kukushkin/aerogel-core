@@ -71,8 +71,8 @@ def url_to( url, opts = {} )
       query_string = "?#{query_string}"
     end
   end
-  scheme = opts[:scheme] || request.scheme || 'http:'
-  scheme_hostname = hostname.nil? ? '' : "#{scheme}//#{hostname}"
+  scheme = opts[:scheme] || request.scheme || 'http'
+  scheme_hostname = hostname.nil? ? '' : "#{scheme}://#{hostname}"
   "#{scheme_hostname}#{url}#{query_string}"
 end
 
