@@ -4,5 +4,8 @@ en:
             errors:
                 failed_to_save:
                     "Failed to save %{name}: %{errors}"
-                is_already_in_use:
-                    "is already in use"
+
+    errors:
+        messages:
+            invalid_format: has invalid format
+            unique: must be unique

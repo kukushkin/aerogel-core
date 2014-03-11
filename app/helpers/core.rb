@@ -16,17 +16,7 @@ end
 #
 def current_url( opts = {} )
   url = request.path_info
-  if opts[:locale]
-    unless I18n.available_locales.include? opts[:locale]
-      raise ArgumentError.new("Unavailable locale '#{opts[:locale]}' passed to #current_url helper")
-    end
-    if opts[:locale] == I18n.default_locale
-      url = "#{request.scheme}://#{current_hostname}#{url}"
-    else
-      url = "#{request.scheme}://#{opts[:locale]}.#{current_hostname}#{url}"
-    end
-  end
-  url
+  opts.present? ? url_to( url, opts ) : url
 end
 
 # Returns current locale
@@ -45,6 +35,45 @@ def current_hostname
   hostname_parts = request.host.split '.'
   hostname_parts.shift if I18n.available_locales.include?( hostname_parts.first.to_sym )
   hostname_parts.join "."
+end
+
+# Constructs an URL to a resource.
+#
+# Options passed in +opts+ will be appended to URL as a query string,
+# except some reserved options which have special meaning:
+#   :locale => constructs URL with a certain locale
+#   :scheme => constructs URL with a certain protocol
+#   :fqdn => constructs full qualified URL, including hostname and protocol
+#
+# Example:
+#   url_to "/bar", locale: :de, page: 2, order: :name # => "http://de.example.org/bar?page=2&order=name"
+#
+def url_to( url, opts = {} )
+  hostname = nil
+  if opts[:fqdn] || opts[:scheme]
+    opts[:locale] ||= current_locale
+  end
+  if opts[:locale]
+    unless I18n.available_locales.include? opts[:locale]
+      raise ArgumentError.new("Unavailable locale '#{opts[:locale]}' passed to #url_to helper")
+    end
+    if opts[:locale] == I18n.default_locale
+      hostname = current_hostname
+    else
+      hostname = "#{opts[:locale]}.#{current_hostname}"
+    end
+  end
+  query_string = opts.except( :locale, :fqdn, :scheme ).map{|k,v| "#{k}=#{h v}"}.join "&"
+  if query_string.present?
+    if url =~ /\?/
+      query_string = "&#{query_string}"
+    else
+      query_string = "?#{query_string}"
+    end
+  end
+  scheme = opts[:scheme] || request.scheme || 'http:'
+  scheme_hostname = hostname.nil? ? '' : "#{scheme}//#{hostname}"
+  "#{scheme_hostname}#{url}#{query_string}"
 end
 
 # xhr-conscious redirect.

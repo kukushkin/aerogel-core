@@ -4,3 +4,8 @@ ru:
             errors:
                 failed_to_save:
                     "Не удалось сохранить объект %{name}: %{errors}"
+
+    errors:
+        messages:
+            invalid_format: 'имеет неправильный формат'
+            unique: 'должен быть уникальным'
