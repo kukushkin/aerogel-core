@@ -33,7 +33,16 @@ module Aerogel::I18n
   end
 
   def self.l( *args )
-    ::I18n.l( *args )
+    if args.first.nil? && args.second.is_a?( Hash ) && args.second[:default].present?
+      default_value = args.second[:default]
+      if default_value.is_a? Symbol
+        ::I18n.t default_value
+      else
+        default_value
+      end
+    else
+      ::I18n.l( *args )
+    end
   end
 
   def self.locale( *args )
