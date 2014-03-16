@@ -41,6 +41,11 @@ module Aerogel::Db
   #
   def self.clear!
     puts "* clearing database"
+    models.each do |model_class|
+      puts "** destroing all objects in #{model_class.name}"
+      model_class.destroy_all
+    end
+    puts "* purging database"
     Mongoid.purge!
   end
 
