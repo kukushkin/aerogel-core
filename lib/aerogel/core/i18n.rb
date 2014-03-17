@@ -1,4 +1,5 @@
 require 'i18n'
+require 'aerogel/core/i18n/number_helper'
 
 # Aerogel::I18n provides localization support for aerogel applications.
 #
@@ -59,6 +60,13 @@ module Aerogel::I18n
   def self.available_locales
     ::I18n.available_locales
   end
+
+  # Human file size helper.
+  #
+  extend NumberHelper
+  #def self.number_to_human_size( *args )
+  #  ActiveSupport::NumberHelper.number_to_human_size( *args )
+  #end
 
 private
 

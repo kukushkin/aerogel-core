@@ -23,13 +23,13 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sinatra-asset-pipeline'
   spec.add_dependency 'rack-flash3'
   spec.add_dependency 'sinatra-redirect-with-flash'
-  spec.add_dependency 'active_support'
+  # spec.add_dependency 'active_support' #, "~> 4.0"
   spec.add_dependency 'sass'
   spec.add_dependency 'coffee-script'
   spec.add_dependency 'uglifier'
   spec.add_dependency 'yui-compressor'
   spec.add_dependency 'aerogel-configurator', "~> 1.3"
-  spec.add_dependency 'mongoid'
+  spec.add_dependency 'mongoid', "~> 3.1"
   spec.add_dependency 'i18n'
 
   spec.add_development_dependency "bundler", "~> 1.3"
