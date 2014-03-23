@@ -42,10 +42,12 @@ private
   # Sets up reloader for routes.
   #
   def self.setup_reloader(app)
-    app.use Aerogel::Reloader, ->{ Aerogel.get_resource_list( :app, "routes/**/*.rb" ) } do |files|
+    app.use Aerogel::Reloader,
+      ->{ Aerogel.get_reverse_resource_list( :app, "routes/**/*.rb" ) },
+      group: :routes do |files|
       # reset routes
       reset!(app)
-      files.reverse.each do |filename|
+      files.each do |filename|
         Aerogel.require_into( Aerogel::Application, filename )
       end
     end

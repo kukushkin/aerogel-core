@@ -19,7 +19,7 @@ private
   # Sets up reloader for helpers.
   #
   def self.setup_reloader(app)
-    app.use Aerogel::Reloader, ->{ Aerogel.get_resource_list( :app, "helpers/**/*.rb" ) } do |files|
+    app.use Aerogel::Reloader, ->{ Aerogel.get_resource_list( :app, "helpers/**/*.rb" ) }, group: :helpers do |files|
       files.each do |filename|
         Aerogel.require_into( Aerogel::Helpers, filename )
       end

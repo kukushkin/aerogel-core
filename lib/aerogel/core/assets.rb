@@ -5,6 +5,28 @@ module Aerogel::Assets
   # Registers and configures assets pipeline
   #
   def self.registered( app )
+    setup_reloader(app) if Aerogel.config.aerogel.reloader?
+    setup_assets_pipeline app
+  end
+
+  # Configures reloader for assets.
+  #
+  def self.setup_reloader(app)
+    app.use Aerogel::Reloader, :routes, after: true do
+      reset!(app)
+      setup_assets_pipeline( app )
+    end
+  end
+
+  # Resets assets pipeline
+  #
+  def self.reset!(app)
+    # TODO how to remove middleware? anyone?
+  end
+
+  # Configures assets pipeline.
+  #
+  def self.setup_assets_pipeline( app )
     # Include these files when precompiling assets
     app.set :assets_precompile,
       %w(application.js controllers/*.js application.css controllers/*.css) +
