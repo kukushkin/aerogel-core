@@ -1,4 +1,5 @@
 require 'mongoid'
+require 'mongoid/tree'
 require 'aerogel/configurator'
 require 'aerogel/core/db/model'
 

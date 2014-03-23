@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'yui-compressor'
   spec.add_dependency 'aerogel-configurator', "~> 1.3"
   spec.add_dependency 'mongoid', "~> 3.1"
+  spec.add_dependency 'mongoid-tree'
   spec.add_dependency 'i18n'
 
   spec.add_development_dependency "bundler", "~> 1.3"

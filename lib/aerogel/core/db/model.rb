@@ -70,4 +70,13 @@ module Model
     end
   end # module Timestamps
 
+  module OrderedTree
+    extend ActiveSupport::Concern
+    included do
+      include Mongoid::Tree
+      include Mongoid::Tree::Ordering
+      include Mongoid::Tree::Traversal
+    end
+  end # module OrderedTree
+
 end # module Model
