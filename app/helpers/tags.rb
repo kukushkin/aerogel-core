@@ -24,8 +24,17 @@ end
 
 # Creates <a href=''..>...</a> tag.
 #
-def link_to( url, text = url, opts = {} )
-  tag :a, text, opts.merge( href: url )
+def link_to( url, *args, &block )
+  opts = (String === args.first) ? args[1] : args[0]
+  opts = {
+    href: url
+  }.deep_merge( opts || {} )
+  if String === args.first
+    args[1] = opts
+  else
+    args[0] = opts
+  end
+  tag :a, *args, &block
 end
 
 # Creates a <button ...>...</button> tag.
