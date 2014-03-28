@@ -5,6 +5,26 @@ def h( str )
   Rack::Utils.escape_html(str)
 end
 
+# Displays text only first time the helper is called in this request
+# Usage:
+#   render_once "hello, world"
+# Or:
+#   render_once :hello_message, "hello, world"
+#
+def render_once( *args )
+  @render_once_hash ||= {}
+  if Symbol === args.first
+    key = args.shift
+    text = args.shift
+  else
+    key = args.shift
+    text = key
+  end
+  return '' if @render_once_hash.key? key
+  @render_once_hash[key] = true
+  text
+end
+
 # Renders erb template.
 #
 def view( name, opts = {} )
