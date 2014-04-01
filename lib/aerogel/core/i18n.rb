@@ -34,7 +34,7 @@ module Aerogel::I18n
   end
 
   def self.l( *args )
-    if args.first.nil? && args.second.is_a?( Hash ) && args.second[:default].present?
+    if args.first.nil? && args.second.is_a?( Hash ) && args.second.key?(:default)
       default_value = args.second[:default]
       if default_value.is_a? Symbol
         ::I18n.t default_value
