@@ -43,7 +43,7 @@ def partial( name, opts = {} )
   opts[:layout] = false
 
   # render single template
-  unless opts[:collection].present?
+  unless opts.key? :collection
     return erb template_name, opts
   end
 
