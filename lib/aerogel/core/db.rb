@@ -85,7 +85,9 @@ private
   # Configures reloader for models.
   #
   def self.setup_reloader(app)
-    app.use Aerogel::Reloader, ->{ Aerogel.get_resource_list( "db/model", "**/*.rb" ) } do
+    app.use Aerogel::Reloader,
+    ->{ Aerogel.get_resource_list( "db/model", "**/*.rb" ) },
+    group: :'db/model' do
       reset!(app)
       load_models
     end
