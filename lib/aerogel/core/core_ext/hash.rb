@@ -39,4 +39,10 @@ class Hash
     self
   end
 
+  # Returns Hash converted to a string of HTML tag attributes.
+  #
+  def to_html_params
+    self.map{|n, v| v.nil? ? "#{n}" : "#{n}=\"#{v}\""}.join(" ")
+  end
+
 end # class Array

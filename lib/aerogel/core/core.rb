@@ -24,7 +24,9 @@ module Aerogel
   #
   def self.register_path( path, type = nil )
     @registered_paths ||= []
-    @registered_paths << { path: File.expand_path( path ), type: type }
+    path = File.expand_path( path )
+    module_name = File.basename path
+    @registered_paths << { path: path, module_name: module_name, type: type }
   end
 
   # Returns registered paths.
@@ -36,10 +38,14 @@ module Aerogel
 
   # Returns list of paths for specified resource type.
   #
-  def self.get_resource_paths( type )
-    registered_paths( type ).map do |p|
-      p[:type].nil? ? File.join( p[:path], type.to_s ) : p[:path]
+  def self.get_resource_paths( type, &block )
+    paths = []
+    registered_paths( type ).each do |base_path|
+      path = base_path[:type].nil? ? File.join( base_path[:path], type.to_s ) : base_path[:path]
+      paths << { base_path: base_path, path: path }
+      yield path, base_path if block_given?
     end
+    paths.map {|p| p[:path] }
   end
 
   # Returns list of filenames of resources of specified type,
@@ -56,7 +62,8 @@ module Aerogel
   #   etc
   #
   def self.get_resource_list( type, wildcard, environment = nil, &block )
-    get_resource_paths( type ).map do |path|
+    resource_list = []
+    get_resource_paths( type ) do |path, base_path|
       paths = Dir.glob( File.join( path, wildcard ) )
       if environment
         paths << Dir.glob( File.join( path, environment.to_s, wildcard ) )
@@ -65,11 +72,12 @@ module Aerogel
       if block_given?
         paths.each do |filename|
           relative_filename = filename.sub( /^#{path}\/?/, '' )
-          yield filename, relative_filename, path
+          yield filename, relative_filename, path, base_path
         end
       end
-      paths
-    end.flatten
+      resource_list << paths
+    end
+    resource_list.flatten
   end
 
   # Returns reversed list of filenames of resources of specified type,
