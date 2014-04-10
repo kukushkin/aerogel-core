@@ -5,7 +5,7 @@ require 'aerogel/core/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "aerogel-core"
-  spec.version       = Aerogel::VERSION
+  spec.version       = Aerogel::Core::VERSION
   spec.authors       = ["Alex Kukushkin"]
   spec.email         = ["alex@kukushk.in"]
   spec.description   = %q{Aerogel core module}

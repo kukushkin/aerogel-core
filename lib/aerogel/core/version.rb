@@ -1,3 +1,5 @@
 module Aerogel
-  VERSION = '1.4.0'
+  module Core
+    VERSION = '1.4.0'
+  end # module Core
 end
