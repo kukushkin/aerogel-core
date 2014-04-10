@@ -15,7 +15,7 @@ end
 #   current_url locale: :ru
 #
 def current_url( opts = {} )
-  url = request.path_info
+  url = URI.unescape( request.path_info )
   opts.present? ? url_to( url, opts ) : url
 end
 
