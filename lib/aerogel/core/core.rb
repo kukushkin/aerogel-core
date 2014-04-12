@@ -11,7 +11,7 @@ module Aerogel
   # Returns module version.
   #
   def self.version
-    Aerogel::VERSION
+    Aerogel::Core::VERSION
   end
 
   # Registers a new path for all resource loaders.
