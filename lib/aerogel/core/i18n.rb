@@ -89,8 +89,12 @@ private
   def self.reload!( files = nil )
     ::I18n.load_path = files || get_locale_files
     ::I18n.reload!
-    ::I18n.default_locale = Aerogel.config.locales.default! if Aerogel.config.locales.default?
     ::I18n.available_locales = Aerogel.config.locales.enabled! if Aerogel.config.locales.enabled?
+    if Aerogel.config.locales.default?
+      ::I18n.default_locale = Aerogel.config.locales.default!
+    else
+      ::I18n.default_locale = ::I18n.available_locales.first
+    end
   end
 
 
