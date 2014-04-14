@@ -108,7 +108,12 @@ private
   def self.load_and_process_seeds!
     seed_files = Aerogel.get_resource_list( 'db/seed', '*.seed', environment )
     seed_files.each do |seed_file|
-      load_and_process_single_seed! seed_file
+      begin
+        load_and_process_single_seed! seed_file
+      rescue => e
+        puts "!!! Failed to process seed: #{seed_file}"
+        puts "!!! #{e}"
+      end
     end
   end
 
