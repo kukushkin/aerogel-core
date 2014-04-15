@@ -5,7 +5,21 @@ en:
                 failed_to_save:
                     "Failed to save %{name}: %{errors}"
 
-    errors:
+    errors: &errors
+        format:  '%{attribute} %{message}'
         messages:
             invalid_format: has invalid format
             unique: must be unique
+            validations:
+                message: There was validation errors on %{document}
+                summary: "Errors:\n    %{errors}"
+                resolution: Check the instances for this model looking for missing fields or wrong values.
+
+
+
+    activemodel:
+        errors:
+          <<: *errors
+    mongoid:
+        errors:
+          <<: *errors
