@@ -63,7 +63,7 @@ private
   def self.load_models
     reset!
     Aerogel.get_resource_list( 'db/model', '**/*.rb' ) do |full_filename, model_filename, path|
-      puts "** loading model: #{path} #{model_filename}"
+      # puts "** loading model: #{path} #{model_filename}"
       load full_filename
       # puts "** classify: #{class_name}"
       self.models << filename_to_model( model_filename )
