@@ -64,9 +64,9 @@ module Aerogel
   def self.get_resource_list( type, wildcard, environment = nil, &block )
     resource_list = []
     get_resource_paths( type ) do |path, base_path|
-      paths = Dir.glob( File.join( path, wildcard ) )
+      paths = Dir.glob( File.join( path, wildcard ) ).sort
       if environment
-        paths << Dir.glob( File.join( path, environment.to_s, wildcard ) )
+        paths << Dir.glob( File.join( path, environment.to_s, wildcard ) ).sort
       end
       # puts "Aerogel::get_resource_list: type=#{type} environment=#{environment} path=#{path}: #{paths}"
       if block_given?
@@ -95,9 +95,9 @@ module Aerogel
   #
   def self.get_reverse_resource_list( type, wildcard, environment = nil )
     get_resource_paths( type ).reverse.map do |path|
-      paths = Dir.glob( File.join( path, wildcard ) )
+      paths = Dir.glob( File.join( path, wildcard ) ).sort
       if environment
-        paths << Dir.glob( File.join( path, environment.to_s, wildcard ) )
+        paths << Dir.glob( File.join( path, environment.to_s, wildcard ) ).sort
       end
       # puts "Aerogel::get_resource_list: type=#{type} environment=#{environment} path=#{path}: #{paths}"
       paths
