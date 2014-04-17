@@ -1,3 +1,5 @@
+require 'sprockets-sass'
+require 'sass'
 require 'sinatra/asset_pipeline'
 
 module Aerogel::Assets
