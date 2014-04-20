@@ -25,10 +25,10 @@ module Aerogel::I18n
   #
   def self.t( *args )
     if args.size > 0
-      puts "** I18n.t original t: #{args}"
+      # puts "** I18n.t original t: #{args}"
       ::I18n.t( *args )
     else
-      puts "** I18n.t chainable t: #{args}"
+      # puts "** I18n.t chainable t: #{args}"
       Chainable.new( *args )
     end
   end
