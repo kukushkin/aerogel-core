@@ -9,6 +9,7 @@ require 'aerogel/core/db'
 require 'aerogel/core/render'
 require 'aerogel/core/errors'
 require 'aerogel/core/i18n'
+require 'aerogel/core/cache'
 
 class Aerogel::Application < Sinatra::Base
 

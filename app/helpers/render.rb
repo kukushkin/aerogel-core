@@ -28,14 +28,29 @@ end
 # Renders erb template.
 #
 def view( name, opts = {} )
+  ts = Time.now
   default_opts = {}
   default_opts[:layout] = :"layouts/#{layout}.html" if layout.present?
-  erb( "#{name}.html".to_sym, default_opts.merge(opts) )
+  #if settings.development?
+    erb( "#{name}.html".to_sym, default_opts.merge(opts) )+( "<!-- %s: %.3fs -->" % [name, Time.now - ts] )
+  #else
+  #  erb( "#{name}.html".to_sym, default_opts.merge(opts) )
+  #end
 end
 
 # Renders partial erb template.
 #
 def partial( name, opts = {} )
+  if opts.key?( :cacheable ) && config.aerogel.cache.enabled?
+    Aerogel::Cache.cacheable current_locale, name, opts[:cacheable] do |key|
+      __uncached_partial( name, opts )+"<!-- cache #{key} @ #{Time.now} -->"
+    end
+  else
+    __uncached_partial( name, opts )
+  end
+end
+
+def __uncached_partial( name, opts = {} )
   name_parts = name.to_s.split('/')
   partial_name = name_parts[-1]
   name_parts[-1] = '_'+partial_name+".html"
@@ -53,7 +68,7 @@ def partial( name, opts = {} )
   opts[:collection].each do |object|
     opts[:locals][partial_name.to_sym] = object
     out += opts[:delimiter] if opts[:delimiter].present? && out.present?
-    out += erb template_name, opts.except( :collection, :delimiter )
+    out += erb template_name, opts.except( :collection, :delimiter, :cacheable )
   end
   out
 end
