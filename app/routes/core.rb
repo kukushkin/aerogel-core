@@ -2,7 +2,6 @@
 get "/*" do |filename|
   pass if filename.blank?
   path = Aerogel.get_resource( :public, filename )
-  puts "Serving static file: '#{path}' or not?"
   pass unless path
   pass unless File.file? path
   send_file path
@@ -15,7 +14,11 @@ end
 
 # serve default root actions
 get "/:action" do
-  view params['action'] # rescue raise Sinatra::NotFound.new
+  begin
+    view params['action']
+  rescue Errno::ENOENT
+    pass
+  end
 end
 
 not_found do
