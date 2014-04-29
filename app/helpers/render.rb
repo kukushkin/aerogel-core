@@ -2,7 +2,7 @@
 # Escapes html string.
 #
 def h( str )
-  Rack::Utils.escape_html(str)
+  Rack::Utils.escape_html(str.to_s)
 end
 
 # Displays text only first time the helper is called in this request
